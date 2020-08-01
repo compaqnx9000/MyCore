@@ -9,12 +9,22 @@ namespace MyCore.Utils
 {
     public class HttpCli
     {
+        public static HttpClient _client = new HttpClient();
+
+        public static async Task<string> GetAsyncJson(string url)
+        {
+            HttpResponseMessage response = await _client.GetAsync(url);
+            response.EnsureSuccessStatusCode();
+            string responseBody = await response.Content.ReadAsStringAsync();
+            return responseBody;
+
+
+        }
         public static async Task<string> PostAsyncJson(string url, string json)
         {
-            HttpClient client = new HttpClient();
             HttpContent content = new StringContent(json);
             content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-            HttpResponseMessage response = await client.PostAsync(url, content);
+            HttpResponseMessage response = await _client.PostAsync(url, content);
             response.EnsureSuccessStatusCode();
             string responseBody = await response.Content.ReadAsStringAsync();
             return responseBody;

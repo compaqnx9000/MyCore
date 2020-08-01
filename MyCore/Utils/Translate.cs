@@ -18,11 +18,21 @@ namespace MyCore.Utils
         /// <returns>GeoJson格式。</returns>
         public static string Geometry2GeoJson(Geometry geometry)
         {
+            //if (geometry == null)
+            //    return "";
+
+            //NetTopologySuite.IO.GeoJsonWriter geoJsonWriter = new NetTopologySuite.IO.GeoJsonWriter();
+            //return geoJsonWriter.Write(geometry);//JsonWriter writer
+
             if (geometry == null)
                 return "";
 
+            AttributesTable attributes = new AttributesTable();
+            //attributes.Add("level", level);
+            IFeature feature = new Feature(geometry, attributes);
+
             NetTopologySuite.IO.GeoJsonWriter geoJsonWriter = new NetTopologySuite.IO.GeoJsonWriter();
-            return geoJsonWriter.Write(geometry);//JsonWriter writer
+            return geoJsonWriter.Write(feature);
         }
 
         /// <summary>

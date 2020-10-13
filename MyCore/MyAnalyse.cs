@@ -123,8 +123,11 @@ namespace MyCore
         /// <returns>km</returns>
         public double CalcNuclearPulseRadius(double t, double km, double e)
         {
-            const double e0 = 0.89784 * 10000; // 单位：V/m （原来是5次方，现在改成4次方）
-            double temp = e / (e0 * Math.Pow(t * 1000.0, 1 / 3.0) / Math.Pow(Math.E, Math.Pow(Math.Abs(km - 5), 1 / 2.0)));
+            //const double e0 = 0.89784 * 10000; // 单位：V/m （原来是5次方，现在改成4次方）
+            const double e0 = 0.89784 * 10; // 单位：V/m （原来是5次方，现在改成4次方）
+
+            //double temp = e / (e0 * Math.Pow(t * 1000.0, 1 / 3.0) / Math.Pow(Math.E, Math.Pow(Math.Abs(km - 5), 1 / 2.0)));
+            double temp = e / (e0 * Math.Pow(t , 1 / 3.0) / Math.Pow(Math.E, Math.Pow(Math.Abs(km - 5), 1 / 2.0)));
 
             return Math.Sqrt(1 / temp) - 0.01;
         }
@@ -1652,7 +1655,6 @@ namespace MyCore
                         r_high_prop = rng_at_prop;
                         result = lerp(r_low_prop, h_low_prop, r_high_prop, h_high_prop, h);
                         return result;
-                        break;
                     }
                 }
 
@@ -1661,7 +1663,6 @@ namespace MyCore
                 if ((outer_index >= hobs[p1].Length) || (outer_index < 0))
                 {
                     return -1;
-                    break;
                 }
                 else
                 {

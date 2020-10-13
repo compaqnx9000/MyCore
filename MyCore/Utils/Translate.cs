@@ -93,7 +93,7 @@ namespace MyCore.Utils
         {
             if (r <= 0) return null;
 
-            int step = steps | 64;
+            //int step = steps | 64;
 
             List<Coordinate> coordinates = new List<Coordinate>();
             for (int i = 0; i < steps; i++)
